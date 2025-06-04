@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zerodha Portfolio Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo-section">
+                        <h1>Portfolio Dashboard</h1>
+                        <div class="portfolio-summary">
+                            <div class="total-value">₹24,56,780</div>
+                            <div class="today-change positive">
+                                <span class="change-amount">+₹12,340</span>
+                                <span class="change-percent">(+0.51%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Total Invested</div>
+                            <div class="stat-value">₹21,00,000</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Total Returns</div>
+                            <div class="stat-value positive">₹3,56,780</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tab-navigation">
+            <div class="container">
+                <div class="tab-list">
+                    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+                    <button class="tab-btn" data-tab="analytics">Analytics</button>
+                    <button class="tab-btn" data-tab="tax-summary">Tax Summary</button>
+                    <button class="tab-btn" data-tab="chat">Chat</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="container">
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="tab-content active">
+                    <!-- Benchmark Comparison -->
+                    <section class="benchmark-section">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Portfolio vs Benchmark (NIFTY 50)</h3>
+                                <div class="benchmark-comparison">
+                                    <div class="benchmark-item">
+                                        <span class="benchmark-label">Your Portfolio</span>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 67%"></div>
+                                        </div>
+                                        <span class="benchmark-value">+0.67%</span>
+                                    </div>
+                                    <div class="benchmark-item">
+                                        <span class="benchmark-label">NIFTY 50</span>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill benchmark" style="width: 43%"></div>
+                                        </div>
+                                        <span class="benchmark-value">+0.43%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Holdings and Charts -->
+                    <div class="dashboard-grid">
+                        <!-- Holdings Table -->
+                        <section class="holdings-section">
+                            <div class="card">
+                                <div class="card__body">
+                                    <div class="section-header">
+                                        <h3>Holdings</h3>
+                                        <div class="search-container">
+                                            <input type="text" id="search-holdings" class="form-control" placeholder="Search holdings...">
+                                        </div>
+                                    </div>
+                                    <div class="table-container">
+                                        <table class="holdings-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Stock</th>
+                                                    <th>Qty</th>
+                                                    <th>Avg Price</th>
+                                                    <th>Current Price</th>
+                                                    <th>P&L</th>
+                                                    <th>Day Change</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="holdings-tbody">
+                                                <!-- Holdings will be populated by JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Sector Allocation Chart -->
+                        <section class="chart-section">
+                            <div class="card">
+                                <div class="card__body">
+                                    <h3>Sector Allocation</h3>
+                                    <div class="chart-container">
+                                        <canvas id="sectorChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Analytics Tab -->
+                <div id="analytics" class="tab-content">
+                    <div class="analytics-grid">
+                        <!-- CAGR Calculator -->
+                        <section class="cagr-section">
+                            <div class="card">
+                                <div class="card__body">
+                                    <h3>Portfolio CAGR Analysis</h3>
+                                    <div class="cagr-grid">
+                                        <div class="cagr-item">
+                                            <div class="cagr-period">1M</div>
+                                            <div class="cagr-value">5.8%</div>
+                                        </div>
+                                        <div class="cagr-item">
+                                            <div class="cagr-period">3M</div>
+                                            <div class="cagr-value">8.2%</div>
+                                        </div>
+                                        <div class="cagr-item">
+                                            <div class="cagr-period">6M</div>
+                                            <div class="cagr-value">14.6%</div>
+                                        </div>
+                                        <div class="cagr-item">
+                                            <div class="cagr-period">1Y</div>
+                                            <div class="cagr-value">16.8%</div>
+                                        </div>
+                                        <div class="cagr-item">
+                                            <div class="cagr-period">YTD</div>
+                                            <div class="cagr-value">18.5%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Performance Chart -->
+                        <section class="performance-chart-section">
+                            <div class="card">
+                                <div class="card__body">
+                                    <h3>Portfolio Performance</h3>
+                                    <div class="chart-container">
+                                        <canvas id="performanceChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Holdings CAGR Table -->
+                        <section class="holdings-cagr-section">
+                            <div class="card">
+                                <div class="card__body">
+                                    <h3>Individual Stock CAGR</h3>
+                                    <div class="table-container">
+                                        <table class="cagr-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Stock</th>
+                                                    <th>1M</th>
+                                                    <th>3M</th>
+                                                    <th>6M</th>
+                                                    <th>1Y</th>
+                                                    <th>YTD</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="cagr-tbody">
+                                                <!-- CAGR data will be populated by JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Tax Summary Tab -->
+                <div id="tax-summary" class="tab-content">
+                    <div class="tax-grid">
+                        <section class="tax-overview">
+                            <div class="card">
+                                <div class="card__body">
+                                    <h3>Tax Summary</h3>
+                                    <div class="tax-stats">
+                                        <div class="tax-item">
+                                            <div class="tax-label">Short-Term Capital Gains</div>
+                                            <div class="tax-value">₹25,600</div>
+                                            <div class="tax-note">Taxed at slab rate</div>
+                                        </div>
+                                        <div class="tax-item">
+                                            <div class="tax-label">Long-Term Capital Gains</div>
+                                            <div class="tax-value">₹45,200</div>
+                                            <div class="tax-note">10% tax on gains > ₹1L</div>
+                                        </div>
+                                        <div class="tax-item">
+                                            <div class="tax-label">Realized Losses</div>
+                                            <div class="tax-value negative">₹8,900</div>
+                                            <div class="tax-note">Available for offset</div>
+                                        </div>
+                                        <div class="tax-item total">
+                                            <div class="tax-label">Estimated Tax Liability</div>
+                                            <div class="tax-value">₹12,880</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="tax-breakdown">
+                            <div class="card">
+                                <div class="card__body">
+                                    <h3>Tax Calculation Breakdown</h3>
+                                    <div class="tax-calculation">
+                                        <div class="calc-item">
+                                            <span>Long-Term Gains (>₹1L)</span>
+                                            <span>₹45,200 - ₹1,00,000 = ₹0</span>
+                                            <span>₹0 × 10% = ₹0</span>
+                                        </div>
+                                        <div class="calc-item">
+                                            <span>Short-Term Gains</span>
+                                            <span>₹25,600</span>
+                                            <span>At your slab rate (~30%) = ₹7,680</span>
+                                        </div>
+                                        <div class="calc-item">
+                                            <span>Securities Transaction Tax</span>
+                                            <span>Approx. ₹5,200</span>
+                                        </div>
+                                        <div class="calc-total">
+                                            <span>Total Estimated Tax</span>
+                                            <span>₹12,880</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Chat Tab -->
+                <div id="chat" class="tab-content">
+                    <div class="chat-container">
+                        <div class="card">
+                            <div class="card__body">
+                                <div class="chat-header">
+                                    <h3>Portfolio Assistant</h3>
+                                    <p>Ask questions about your portfolio, performance, or trading strategies</p>
+                                </div>
+                                
+                                <div class="quick-questions">
+                                    <h4>Quick Questions:</h4>
+                                    <div class="question-buttons">
+                                        <button class="btn btn--secondary btn--sm question-btn">What's my best performing stock?</button>
+                                        <button class="btn btn--secondary btn--sm question-btn">How is my portfolio diversified?</button>
+                                        <button class="btn btn--secondary btn--sm question-btn">What are my tax implications?</button>
+                                        <button class="btn btn--secondary btn--sm question-btn">Should I rebalance my portfolio?</button>
+                                    </div>
+                                </div>
+
+                                <div class="chat-messages" id="chatMessages">
+                                    <div class="message bot-message">
+                                        <div class="message-content">
+                                            Hello! I'm your portfolio assistant. I can help you analyze your investments, understand your performance, and answer questions about your holdings. What would you like to know?
+                                        </div>
+                                        <div class="message-time">Just now</div>
+                                    </div>
+                                </div>
+
+                                <div class="chat-input-container">
+                                    <div class="chat-input-group">
+                                        <input type="text" id="chatInput" class="form-control" placeholder="Ask about your portfolio...">
+                                        <button class="btn btn--primary" id="sendMessage">Send</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
